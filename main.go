@@ -3,16 +3,16 @@ package main
 import (
 	"fmt"
 
-	bbdbv1 "github.com/a-poor/bbdb/gen/proto/go/bbdb/v1"
+	pb "github.com/a-poor/bbdb/gen/proto/go/bbdb/v1alpha"
 )
 
 func main() {
 	fmt.Println("Hello, world!")
 
-	f := bbdbv1.Field{
+	f := pb.Field{
 		Name:  "user",
-		Dtype: bbdbv1.DataType_STRING,
+		Dtype: pb.DataType_STRING,
 	}
-	// fmt.Println(f.String())
-	fmt.Printf("%+v\n", f)
+	fmt.Println(f.String())
+	// fmt.Printf("%+v\n", f)
 }
