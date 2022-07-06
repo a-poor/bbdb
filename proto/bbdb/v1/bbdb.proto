@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package bbdb.v1;
+
+option go_package = "github.com/a-poor/bbdb/gen/proto/go/bbdb/v1;bbdbv1";
+
+// Accepted data types for a field
+enum DataType {
+  UNKNOWN = 0;
+
+  // String data
+  STRING = 1;
+
+  // A 32-bit signed integer
+  INT = 2;
+
+  // A 64-bit signed integer
+  FLOAT = 3;
+
+  // A boolean value
+  BOOL = 4;
+}
+
+message DataPage {
+}
+
+// Field represents a field in a DB table record.
+message Field {
+  // The name of the field
+  string name = 1;
+
+  // The type of the field
+  DataType dtype = 2;
+
+  // Is the field null?
+  bool is_null = 3;
+
+  // The value of the field
+  oneof value {
+    bool null = 4;
+    string string_val = 5;
+    int32 int_val = 6;
+    double double_val = 7;
+    bool bool_val = 8;
+  }
+}
+
+// Record represents a record in a DB table.
+message Record {
+  // Fields of the record
+  repeated Field fields = 1;
+}
+
+// Column represents a column definition in a DB schema table.
+message Column {
+  // The column's index in the table schema
+  int32 index = 1;
+
+  // The column's name
+  string name = 2;
+
+  // The column's data type
+  DataType dtype = 3;
+}
+
+// TableSchema represents a DB table schema.
+message TableSchema {
+  // The name of the table
+  string table_name = 1;
+
+  // The columns of the table
+  repeated Column columns = 2;
+}
+
